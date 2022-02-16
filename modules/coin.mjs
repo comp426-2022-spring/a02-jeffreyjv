@@ -14,10 +14,13 @@
  * 
  */
 
-export function coinFlip() {
-  return Math.random() > .5 ? ("heads") : ("tails")
+ export function coinFlip() {
+  let num = Math.random()
+  if(num > 0.50){
+    return "heads"
+  }
+  return "tails"
 }
-
 
 /** Multiple coin flips
  * 
@@ -38,15 +41,19 @@ export function coinFlip() {
     ]
  */
 
-export function coinFlips(flips) {
-  const arr = [];
-  for(let i=0;i<flips;i++) {
-    arr.push(Math.random() > .5 ? ("heads") : ("tails"));
-  }
-
-return arr;
-}
-
+    export function coinFlips(flips) {
+      let result = [] 
+      for(let i = 0; i < flips; i++){
+        let num = Math.random()
+        if(num > 0.50){
+          result[i] = "heads"
+    
+        } else {
+          result[i] = "tails"
+        }
+      }
+      return result
+    }
 
 /** Count multiple flips
  * 
@@ -61,21 +68,16 @@ return arr;
  * @returns {{ heads: number, tails: number }}
  */
 
-export function countFlips(array) {
-  let arr = [];
-  let hCount = 0;
-  let tCount = 0;
-
-  for(let i=0;i<array.length;i++) {
-    if(array[i] === "heads") {
-      hCount++;
-    } else if(array[i] === "tails") {
-      tCount++;
+ export function countFlips(array) {
+  let count = {heads: 0, tails: 0}
+  for(let i =0; i < array.length; i++){
+    if(array[i] == "heads"){
+      count.heads += 1
+    } else {
+      count.tails += 1
     }
   }
-  arr.push("tails: " + tCount);
-  arr.push("heads: " + hCount);
-  return arr;
+  return count
 }
 
 
@@ -90,16 +92,17 @@ export function countFlips(array) {
  * returns: { call: 'tails', flip: 'heads', result: 'lose' }
  */
 
-export function flipACoin(call) {
-  let arr = [];
-  let x = Math.random() > .5 ? ("heads") : ("tails");
-  if(call == x) {
-    arr.push("call: '" + call + "', flip: '" + x + "', result: 'win'");
+ export function flipACoin(call) {
+  let toss = coinFlip()
+  let outcome = ""
+  if(toss == call){
+    outcome = "win"
   } else {
-    arr.push("call: '" + call + "', flip: '" + x + "', result: 'lose'");
+    outcome = "lose"
   }
-  return arr;
+  return {call: call, flip: toss, result: outcome}
 }
+
 
 
 
